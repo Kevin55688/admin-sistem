@@ -1,19 +1,45 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import LoginView from '../views/LoginView.vue'
+import AdminView from '../views/AdminView.vue'
+import WelcomeView from '../views/WelcomeView.vue'
+// 系統管理相關
+import User from '../views/system manage/UserView.vue'
+import Info from '../views/personal info/InfoView.vue'
+import Config from '../views/personal info/ConfigView.vue'
+import Chart from '../views/system manage/ChartView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'login',
+    component:LoginView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/admin',
+    name: 'admin',
+    component: AdminView,
+    children : [
+      {
+        path : '/welcome',
+        component : WelcomeView
+      },
+      {
+        path : '/systemmanage/chart',
+        component : Chart
+      },
+      {
+        path : '/systemmanage/user',
+        component : User
+      },
+      {
+        path : '/personal/info',
+        component : Info
+      },
+      {
+        path : '/personal/config',
+        component : Config
+      },
+    ]
   }
 ]
 
